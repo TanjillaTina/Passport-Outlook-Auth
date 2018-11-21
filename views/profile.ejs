@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Home</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+ <link href="/css/jumbotron-narrow.css" rel="stylesheet">
+ 
+
+   
+    <!-- CSS (load bootstrap from a CDN) -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>  
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+   
+    
+    </head>
+
+ 
+
+  <body>
+
+    <div class="container">
+      <div class="header">
+        <ul class="nav nav-pills pull-right">
+        
+        
+          <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src= "<%= user.profileImgLink %>" class="rounded-circle" alt="Logo" style="width:70px; height: 70px;" >
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#AddNew">AddNewTask</a>
+                  <a class="dropdown-item" href="#TasksToBeCompleted">Tasks To Be Completed</a>
+                  <a class="dropdown-item" href="#NotCompleted">Completed Tasks</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="/auth/logout">Logout</a>
+                </div>
+              </li>
+          
+        </ul>
+        <h3 class="text-muted"> <%= user.username %></h3>
+
+
+
+
+
+
+
+        
+      </div>
+
+      <div class="jumbotron" id="AddNew">
+        
+        <h3>Welcome <%= user.username %> save your tasks here</h3>
+       
+        <p class="lead"></p>
+        <p></p>
+      <div class="row">
+
+        
+          <div class="col-md-12 col-xs-12 col-sm-0 col-lg-12 ">             
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="card">
+                      <div class="card-body">
+                          <div class="alert alert-success" role="alert">
+                        <h2 class="card-title">Add Task</h2>
+                        <form action="/profile/todos" method="POST">
+                        
+                          <div class="form-group">
+                              <input type="text" name="description" class="form-control" placeholder="Task Name">
+                          </div>
+
+                          
+                          
+                          <button type="submit" class="btn btn-primary">Add</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+
+                  </div>
+
+
+          </div>
+
+          </div>
+      </div>
+
+
+
+<h1></h1><h1></h1><h1></h1>
+
+
+
+<div class="row" id="TasksToBeCompleted">
+
+
+  <div class="col-md-12 col-xs-12 col-sm-0 col-lg-12 ">             
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="card-body">
+                <h2 class="card-title">Tasks To Be Completed </h2>
+      
+                  
+              <div class="list-group">                    
+                <% todos.forEach(function(todos) { %>
+                       <form action="" method="POST">
+                        <div class="alert alert-primary" role="alert">
+                        <div class="d-flex w-100 justify-content-between">
+                          <h2> Task Title: <%= todos.taskname %> </h2>
+                          
+
+                          <input type="hidden"  name="taskId" value=<%= todos.id %> >
+                          <input type="hidden"  name="task_name" value=<%= todos.name %> >
+                          <input type="hidden"  name="task_name" value=<%= todos.name %> >
+                          
+                          
+                        </div>
+
+                        <button type="submit" class="btn btn-secondary" formaction="/profile/todos/delete" >Delete This Task</button>
+                        <button type="submit" class="btn btn-info" formaction="/profile/todos/completed" >This Task is Done</button>
+                      </div>
+                      
+                        
+                    
+                      
+                    </form>
+            
+                      <% }); %>
+                  </div>
+                
+              </div>
+            </div>
+            </div>
+          </div>
+
+          </div>
+
+
+  </div>
+
+
+
+    <h1></h1><h1></h1><h1></h1>
+
+
+    
+    <div class="row" id="NotCompleted">
+
+        
+  <div class="col-md-12 col-xs-12 col-sm-0 col-lg-12 ">             
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title">Completed Tasks </h2>
+  
+              
+          <div class="list-group">                    
+            <%Donetodos.forEach(function(Donetodos) { %>
+                   <form action="" method="POST">
+                    <div class="alert alert-primary" role="alert">
+                    <div class="d-flex w-100 justify-content-between">
+                      <h2> Task Title: <%= Donetodos.taskname %> </h2>
+                      
+
+                      <input type="hidden"  name="taskId" value=<%= Donetodos.id %> >
+                      <input type="hidden"  name="task_name" value=<%= Donetodos.name %> >
+                    </div>
+
+                    <button type="submit" class="btn btn-secondary" formaction="/profile/todos/delete" >Delete This Task</button>
+                    <button type="submit" class="btn btn-danger" formaction="/profile/todos/completed" >Oopps!! Not Done</button>
+                  </div>
+                  
+                    
+                
+                  
+                </form>
+        
+                  <% }); %>
+              </div>
+            
+          </div>
+        </div>
+        </div>
+      </div>
+
+      </div>
+    
+
+      </div>
+  </div>
+      
+
+    </div> <!-- /container -->
+
+    <div class="footer">
+            <p>My Footer here</p>
+          </div>
+  </div>
+       
+
+  </body>
+</html>
